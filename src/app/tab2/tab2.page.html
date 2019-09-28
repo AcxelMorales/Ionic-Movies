@@ -1,9 +1,52 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Tab Two
+      Buscar Película
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-toolbar>
+  <ion-searchbar placeholder="Ej. Guardianes de la Galaxia" animated debounce="700" [value]="txtBuscar"
+    (ionChange)="buscar($event)"></ion-searchbar>
+</ion-toolbar>
+
+<ion-content>
+
+  <ion-grid *ngIf="cargando">
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-spinner name="crescent" color="primary"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list *ngIf="!cargando && !ocultar">
+    <ion-list-header>
+      <ion-label>Ideas</ion-label>
+    </ion-list-header>
+    <ion-item detail *ngFor="let i of ideas">
+      <ion-label color="primary" (click)="txtBuscar = i">{{ i }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid fixed *ngIf="ocultar">
+    <ion-row>
+      <ion-col size="6" *ngFor="let p of peliculas">
+        <ion-card (click)="detalle(p.id)">
+          <img [src]="p.poster_path | imagen">
+          <ion-card-header>
+            <ion-item>
+              <ion-card-subtitle class="fs">{{ p.release_date }}</ion-card-subtitle>
+              <ion-icon class="mr" name="warning" slot="end" [ngClass]="{'red': p.adult, 'green': !p.adult}"></ion-icon>
+            </ion-item>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ p.title }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

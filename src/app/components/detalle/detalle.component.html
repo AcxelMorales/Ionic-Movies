@@ -1,0 +1,74 @@
+<ion-content>
+  <ion-label class="titulo">
+    <h1>{{ detalle?.title }}</h1>
+  </ion-label>
+  <img [src]="detalle.backdrop_path | imagen" *ngIf="detalle.backdrop_path">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" class="poster-detalle-sobre">
+        <ion-card class="poster">
+          <img [src]="detalle.poster_path | imagen" class="poster" *ngIf="detalle.poster_path">
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-icon slot="start" name="thumbs-up" color="primary"></ion-icon>
+          <ion-label>Rating</ion-label>
+          <ion-note slot="end" color="primary">{{detalle.vote_average}}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-icon slot="start" name="contacts" color="primary"></ion-icon>
+          <ion-label>Votos</ion-label>
+          <ion-note slot="end" color="primary">{{detalle.vote_count}}</ion-note>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row fixed>
+      <ion-col size="12">
+        <ion-label>{{ detalle.overview | slice : 0 : oculto }}...</ion-label>
+        <ion-label color="primary" (click)="oculto = 5000" *ngIf="oculto !== 5000">Leer más</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-chip color="primary" *ngFor="let g of detalle.genres">
+          <ion-label>{{ g.name }}</ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-label class="pry">Actores</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-slides [options]="optActores">
+    <ion-slide *ngFor="let a of credits?.cast">
+      <ion-card class="card-actor">
+        <img *ngIf="a.profile_path" [src]="a.profile_path | imagen">
+        <img *ngIf="!a.profile_path" src="/assets/img/no-avatar.jpg">
+        <ion-label class="actor-name">{{ a.name }}</ion-label>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+<ion-footer no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="regresar()">
+        <ion-icon color="primary" slot="start" name="arrow-round-back"></ion-icon>
+        <ion-label color="primary">Regresar</ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="favorito()">
+        <ion-icon color="primary" slot="end" [name]="estrella"></ion-icon>
+        <ion-label color="primary">Favorito</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

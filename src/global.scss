@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +24,92 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.red { color: red !important; }
+.green { color: lime !important; }
+
+.p {
+  color: #3880ff !important;
+  border-bottom: 1px solid #3880ff;
+  border-top: 1px solid #3880ff;
+  padding: 5px;
+  width: 90%;
+}
+
+.mr {
+  font-size: .8rem !important;
+}
+
+.fs {
+  font-size: .6rem !important;
+}
+
+@media (max-width: 375) {
+  .fs {
+    font-size: .2rem !important;
+  }
+}
+
+.poster {
+  width: 110px !important;
+  height: 160px !important;
+}
+
+.pry {
+  color: black;
+  display: block;
+  // border-bottom: 1px solid #3880ff;
+  border-left: 5px solid #3880ff;
+  // padding-bottom: .5rem;
+  padding-left: 1rem;
+  font-weight: 400;
+}
+
+.slide-mas {
+  height: 300px;
+}
+
+.btn-mas {
+  position: relative;
+  top: 13%;
+}
+
+.poster-detalle-sobre {
+  position: relative;
+  top: -75px;
+  left: -10px;
+  margin-bottom: -75px;
+}
+
+.titulo {
+  width: 100%;
+  position: absolute;
+  color: white;
+  background-color: red;
+  padding: 5px 5px 40px 5px;
+
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0) 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+}
+
+.titulo h1 {
+  position: absolute;
+  top: 28px;
+  left: 5px;
+}
+
+.card-actor {
+  height: 210px;
+}
+
+.actor-name {
+  position: relative;
+  top: 15px;
+}
