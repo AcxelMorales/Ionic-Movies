@@ -1,21 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { MoviesService } from '../providers/movies.service';
 import { Pelicula } from '../interfaces/interfaces';
 import { DetalleComponent } from '../components/detalle/detalle.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
 })
-export class Tab2Page {
+export class Tab2Page implements OnDestroy {
 
   public txtBuscar: string = '';
   public ideas    : string[] = ['Proyecto X', 'El señor de los anillos', 'Interestelar', 'Party Monster', 'Pulp Fiction'];
   public peliculas: Pelicula[] = [];
   public cargando : boolean = false;
   public ocultar  : boolean = false;
+
+  buscarSubscription: Subscription = new Subscription();
 
   constructor(
     public _moviesService: MoviesService,
@@ -34,7 +37,7 @@ export class Tab2Page {
       return;
     }
 
-    this._moviesService.buscarPelicula(value).subscribe(peliculas => {
+    this.buscarSubscription = this._moviesService.buscarPelicula(value).subscribe(peliculas => {
       this.cargando  = false;
       this.ocultar   = true;
       this.peliculas = peliculas.results;
@@ -48,6 +51,10 @@ export class Tab2Page {
     });
 
     modal.present();
+  }
+
+  ngOnDestroy(): void {
+    this.buscarSubscription.unsubscribe();
   }
 
 }

@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content class="animated fadeIn">
   <ion-label class="titulo">
     <h1>{{ detalle?.title }}</h1>
   </ion-label>
@@ -33,9 +33,13 @@
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-chip color="primary" *ngFor="let g of detalle.genres">
-          <ion-label>{{ g.name }}</ion-label>
-        </ion-chip>
+        <ion-slides [options]="slideOpts">
+          <ion-slide *ngFor="let g of detalle.genres">
+            <ion-chip color="primary">
+              <ion-label>{{ g.name }}</ion-label>
+            </ion-chip>
+          </ion-slide>
+        </ion-slides>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -52,6 +56,24 @@
         <img *ngIf="a.profile_path" [src]="a.profile_path | imagen">
         <img *ngIf="!a.profile_path" src="/assets/img/no-avatar.jpg">
         <ion-label class="actor-name">{{ a.name }}</ion-label>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-label class="pry">Crew</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-slides [options]="optActores">
+    <ion-slide *ngFor="let c of crew">
+      <ion-card class="card-job">
+        <img *ngIf="c.profile_path" [src]="c.profile_path | imagen">
+        <img *ngIf="!c.profile_path" src="/assets/img/no-avatar.jpg">
+        <ion-label class="actor-name">{{ c.name }}</ion-label>
+        <br>
+        <ion-label class="actor-name job">{{ c.job }}</ion-label>
       </ion-card>
     </ion-slide>
   </ion-slides>

@@ -11,7 +11,7 @@
     (ionChange)="buscar($event)"></ion-searchbar>
 </ion-toolbar>
 
-<ion-content>
+<ion-content class="animated fadeIn">
 
   <ion-grid *ngIf="cargando">
     <ion-row>
@@ -25,8 +25,8 @@
     <ion-list-header>
       <ion-label>Ideas</ion-label>
     </ion-list-header>
-    <ion-item detail *ngFor="let i of ideas">
-      <ion-label color="primary" (click)="txtBuscar = i">{{ i }}</ion-label>
+    <ion-item detail *ngFor="let i of ideas" (click)="txtBuscar = i">
+      <ion-label color="primary">{{ i }}</ion-label>
     </ion-item>
   </ion-list>
 

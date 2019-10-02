@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { Subscription } from 'rxjs';
 
 import { MoviesService } from '../providers/movies.service';
 import { RespuestaMDB, Pelicula } from '../interfaces/interfaces';
@@ -7,15 +9,18 @@ import { RespuestaMDB, Pelicula } from '../interfaces/interfaces';
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
 })
-export class Tab1Page implements OnInit {
+export class Tab1Page implements OnInit, OnDestroy {
 
   peliculasRecientes: Pelicula[] = [];
   populares         : Pelicula[] = [];
+
+  recientesSubscription: Subscription = new Subscription();
+  popularesSubscription: Subscription = new Subscription();
   
   constructor(public _moviesService: MoviesService) {}
 
   ngOnInit(): void {
-    this._moviesService.getFeature().subscribe((resp: RespuestaMDB) => this.peliculasRecientes = resp.results);
+    this.recientesSubscription = this._moviesService.getFeature().subscribe((resp: RespuestaMDB) => this.peliculasRecientes = resp.results);
     this.getPopulares();
   }
   
@@ -24,10 +29,15 @@ export class Tab1Page implements OnInit {
   }
   
   private getPopulares(): void {
-    this._moviesService.getPopular().subscribe((resp: RespuestaMDB) => {
+    this.popularesSubscription = this._moviesService.getPopular().subscribe((resp: RespuestaMDB) => {
       const arrTemp = [...this.populares, ...resp.results];
       this.populares = arrTemp;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.recientesSubscription.unsubscribe();
+    this.popularesSubscription.unsubscribe();
   }
 
 }

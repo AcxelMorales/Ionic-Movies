@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content *ngIf="peliculas.length > 0" class="animated fadeIn">
   <ion-grid fixed>
     <ion-row>
       <ion-col>
@@ -17,4 +17,23 @@
       <app-slideshow-poster [peliculas]="pg.pelis"></app-slideshow-poster>
     </ion-grid>
   </div>
+</ion-content>
+
+<ion-content *ngIf="peliculas.length === 0" class="animated fadeIn">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <h3 class="pry">Recomendaciones</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card class="c-f">
+    <img src="../../assets/img/user.png" alt="user-image" class="user-image">
+    <ion-card-header>
+      <ion-card-title>Datos no disponibles</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Le recomendamos agregar elementos a la sección de favoritos.
+    </ion-card-content>
+  </ion-card>
 </ion-content>
